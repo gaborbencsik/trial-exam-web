@@ -7,15 +7,33 @@ html {
 }
 
 body {
-  width: 70rem;
+  width: 50rem;
   margin: 0 auto;
 }
+
+hr {
+  width: 50rem;
+}
+
 h1 {
   font-size: 2rem;
 }
 
-p {
+ul {
+  padding-left: 0;
+}
+
+p, li {
   font-size: 1.5rem;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-bottom: 1rem;
 }
 
 input,button {
@@ -23,8 +41,15 @@ input,button {
   margin-top: 3rem;
 }
 
-input {
+input[type="number"] {
   height: 3rem;
+}
+
+input[type="text"] {
+  height: 10rem;
+  width: 30rem;
+  text-align: left;
+
 }
 
 input::-webkit-inner-spin-button {

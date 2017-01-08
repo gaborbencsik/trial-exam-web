@@ -9,9 +9,10 @@
   <body>
     <section class="input-fields">
       <h1>Type your text here:</h1>
-      <textarea name="name" rows="8" cols="80"></textarea>
-      <input type="number" value="1">
-      <button type="button" name="button">Let's decode</button>
+      <!-- <input type="text" name="" value=""> -->
+      <textarea class="textarea" name="name" rows="8" cols="80" placeholder="Type text here"></textarea>
+      <input class="shift" type="number" value="1" min="-25" max="25">
+      <button class="button" type="button" name="button">Let's decode</button>
     </section>
     <hr>
     <section class="output-fields">
@@ -21,8 +22,10 @@
     <hr>
     <section class="previus-messages">
       <h1>Previously decoded messages</h1>
-      <p>first</p>
-      <p>second</p>
+      <ul class="previous">
+        <li>first</li>
+        <li>second</li>
+      </ul>
     </section>
 
     <script src="script.js" type="text/javascript"></script>

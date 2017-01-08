@@ -18,6 +18,41 @@ const postMessage = (function () {
   }
 }) ();
 
+const changeUi = (function () {
+  let p = document.getElementsByTagName('p');
+  let listContainer = document.querySelector('.previous');
+
+  function createElement(text) {
+    let listItem = document.createElement('li');
+    listContainer.appendChild(listItem);
+    listItem.innerHTML = text;
+  };
+
+  function renderList(data) {
+    data.forEach(function(item){
+      createElement(item.text)
+    });
+  };
+
+  function changeText(decoded) {
+    p.innerHTML = decoded;
+  };
+
+  return {
+    createElement: function () {
+      return createElement();
+    },
+    renderList: function () {
+      return renderList();
+    },
+    changeText: function () {
+      return changeText();
+    }
+  }
+
+}) ();
+
+
 const ajax = (function (){
 
   let getMessageList = function () {
@@ -52,6 +87,7 @@ const ajax = (function (){
 
   return {
     postMessage: function() {
+      console.log('return x');
       return postMessage();
     },
     getMessageList: function () {

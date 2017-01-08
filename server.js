@@ -4,6 +4,9 @@ var mysql = require('mysql');
 var express = require('express');
 var app = express();
 
+var decrypt = require('./decrypt.js');
+decryptText();
+
 var bodyParser = require('body-parser');
 
 var connection = mysql.createConnection({
@@ -15,7 +18,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function connectMsql(error) {
   if (error) {
-    console.log('Connection ailed', error);
+    console.log('Connection failed', error);
   } else {
     console.log('Successful');
   }
@@ -44,7 +47,8 @@ app.get('/decode/all', function (req, res) {
 });
 
 app.post('/decode', function(req, res) {
-  console.log(req.body);
+  console.log(req);
+  console.log('app post');
   connection.query({
     sql: 'INSERT INTO messages (message) VALUES (?);',
     values: [req.body.text]
@@ -53,7 +57,12 @@ app.post('/decode', function(req, res) {
         console.log(err.toString());
         return;
       }
-      res.send(rows);
+      var result = [];
+      rows.forEach(function(line, index) {
+        result.push(line.text);
+      });
+      console.log(result);
+      res.status(200).send({all: result});
     });
 });
 

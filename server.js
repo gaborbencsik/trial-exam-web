@@ -5,7 +5,8 @@ var express = require('express');
 var app = express();
 
 var decrypt = require('./decrypt.js');
-decryptText();
+console.log(decrypt);
+decrypt.logThings();
 
 var bodyParser = require('body-parser');
 
@@ -47,7 +48,7 @@ app.get('/decode/all', function (req, res) {
 });
 
 app.post('/decode', function(req, res) {
-  console.log(req);
+  console.log(req.body);
   console.log('app post');
   connection.query({
     sql: 'INSERT INTO messages (message) VALUES (?);',
@@ -57,12 +58,9 @@ app.post('/decode', function(req, res) {
         console.log(err.toString());
         return;
       }
-      var result = [];
-      rows.forEach(function(line, index) {
-        result.push(line.text);
-      });
-      console.log(result);
-      res.status(200).send({all: result});
+
+      console.log(rows);
+      res.status(200).send(rows);
     });
 });
 

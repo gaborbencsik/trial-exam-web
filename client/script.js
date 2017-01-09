@@ -6,15 +6,14 @@ const postMessage = (function () {
   button.addEventListener('click', sendMessage);
 
   function sendMessage() {
-    ajax.postMessage(shift.value, textarea.value);
     console.log(shift.value);
     console.log(textarea.value);
+    ajax.postMessage(shift.value, textarea.value);
+    textarea.value = '';
   };
 
   return {
-    sendMessage: function() {
-      return sendMessage();
-    }
+    sendMessage: sendMessage
   }
 }) ();
 
@@ -39,15 +38,9 @@ const changeUi = (function () {
   };
 
   return {
-    createElement: function () {
-      return createElement();
-    },
-    renderList: function () {
-      return renderList();
-    },
-    changeText: function () {
-      return changeText();
-    }
+    // createElement: createElement,
+    renderList: renderList,
+    changeText: changeText
   }
 
 }) ();
@@ -71,29 +64,25 @@ const ajax = (function (){
 
   let postMessage = function (shift, text) {
     console.log('post');
+    console.log(shift);
+    console.log(text);
     let http = new XMLHttpRequest();
     http.onreadystatechange = function () {
       if (http.readyState == XMLHttpRequest.DONE) {
-        JSON.stringify({"shift": shift, "text": text});
-        console.log(JSON.stringify({"shift": shift, "text": text}));
-
+        JSON.parse(http.response);
       };
     };
 
     http.open('POST', 'http://localhost:3000/decode', true);
     http.setRequestHeader("Content-Type", "application/json");
-    http.send();
+    http.send(JSON.stringify({"shift": shift, "text": text}));
+    console.log({"shift": shift, "text": text});
   };
 
   return {
-    postMessage: function() {
-      console.log('return x');
-      return postMessage();
-    },
-    getMessageList: function () {
-      return getMessageList();
-    }
-  }
+    postMessage: postMessage,
+    getMessageList: getMessageList
+  };
 }) ();
 
 console.log('script');

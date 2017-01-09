@@ -1,5 +1,9 @@
-function decryptText () {
-  console.log('Decryption code is working');
-};
+module.exports = (function decryptText () {
+  function logThings () {
+    console.log('Decryption code is working');
+  };
 
-module.exports = decryptText;
+  return {
+    logThings: logThings
+  };
+}) ();
